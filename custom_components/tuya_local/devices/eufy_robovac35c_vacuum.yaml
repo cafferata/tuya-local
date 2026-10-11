@@ -1,0 +1,109 @@
+name: Robot vacuum
+products:
+  - id: VkfXO4Rkkcxlc1Wt
+    manufacturer: eufy
+    model: RoboVac 35C
+    model_id: T2117
+entities:
+  - entity: vacuum
+    dps:
+      - id: 1
+        type: boolean
+        name: power
+      - id: 2
+        type: boolean
+        name: activate
+      - id: 3
+        type: string
+        name: direction_control
+        optional: true
+        mapping:
+          - dps_val: forward
+            value: forward
+          - dps_val: back
+            value: reverse
+          - dps_val: left
+            value: left
+          - dps_val: right
+            value: right
+      - id: 15
+        type: string
+        name: status
+        readonly: true
+        mapping:
+          - dps_val: Running
+            value: cleaning
+          - dps_val: Recharge
+            value: returning
+          - dps_val: Charging
+            value: charging
+          - dps_val: completed
+            value: docked
+          - dps_val: standby
+            value: standby
+          - dps_val: Sleeping
+            value: sleep
+      - id: 101
+        type: boolean
+        name: command
+        mapping:
+          - dps_val: true
+            value: return_to_base
+          - dps_val: false
+            value: none
+      - id: 102
+        type: string
+        name: fan_speed
+        mapping:
+          - dps_val: No_suction
+            value: No suction
+          - dps_val: Standard
+            value: Standard
+          - dps_val: Boost_IQ
+            value: BoostIQ
+          - dps_val: Max
+            value: Max
+      - id: 103
+        type: boolean
+        name: locate
+        optional: true
+  - entity: select
+    name: Mode
+    icon: "mdi:robot-vacuum"
+    dps:
+      - id: 5
+        type: string
+        name: option
+        mapping:
+          - dps_val: auto
+            value: Auto
+          - dps_val: SmallRoom
+            value: Small room
+          - dps_val: Spot
+            value: Spot
+          - dps_val: Edge
+            value: Edge
+          - dps_val: Nosweep
+            value: No sweep
+  - entity: sensor
+    class: battery
+    dps:
+      - id: 104
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+  - entity: binary_sensor
+    class: problem
+    category: diagnostic
+    dps:
+      - id: 106
+        type: string
+        name: sensor
+        mapping:
+          - dps_val: no_error
+            value: false
+          - value: true
+      - id: 106
+        type: string
+        name: fault_code
